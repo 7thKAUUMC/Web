@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { axiosInstance } from "../apis/axios-instance";
 import useCustomFetch from "../hooks/useCustomFetch";
 
 const MovieList = () => {
   const { category } = useParams();
+  const navigate = useNavigate();
+
   let url = "";
 
   if (category === "now-playing") url = `/movie/now_playing`;
@@ -25,10 +27,15 @@ const MovieList = () => {
     return <ErrorText>문제가 발생했습니다.</ErrorText>;
   }
 
+  const handleCardClick = (movieId) => {
+    console.log("Navigating to movie ID:", movieId); // 에러체크용
+    navigate(`/movie/${movieId}`); // 클릭 시 영화 상세 페이지로 이동
+  };
+
   return (
     <MovieGrid>
       {data.results?.map((movie) => (
-        <MovieCard key={movie.id}>
+        <MovieCard key={movie.id} onClick={() => handleCardClick(movie.id)}>
           <MoviePoster
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
             alt={movie.title}

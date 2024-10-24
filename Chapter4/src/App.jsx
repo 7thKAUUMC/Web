@@ -8,6 +8,7 @@ import SignupPage from './pages/signup';
 import SearchPage from './pages/search';
 import MoviesPage from './pages/movies';
 import MovieList from './pages/movielist';
+import MovieInfo from './pages/movieinfo';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: 'movies/:category',
         element: <MovieList/>
+      },
+      {
+        path: 'movie/:movieId',
+        element: <MovieInfo/>
       }
     ]
   }
