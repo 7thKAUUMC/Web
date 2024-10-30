@@ -18,7 +18,7 @@ const MovieList = () => {
     params: { language: "ko", page: "1" },
     headers: {
       accept: "application/json",
-      Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YmY5YWVjMmViMDNjODYzNWIwYTcxNDhmNTc1Mzg5YyIsIm5iZiI6MTcyOTc4MjI1My40MDY1OTUsInN1YiI6IjY3MTY4YzgxYmQ5MWM4MzgyOWQ3ODcwNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.t-VsQQ_g0rngEepLhqi7Nc3NjOk8D-QmNM6ry1p_ZXA",
+      Authorization: "Bearer your_api_key",
     },
   });
 
