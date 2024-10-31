@@ -1,20 +1,42 @@
-import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
 
-const SignUpPage = () => {
-  const { register, handleSubmit } = useForm();
+function useForm(initialValues, validate) {
+  console.log("initialValues!!!!: ", initialValues);
+  console.log("validate!!!!: ", validate);
+  const [values, setValues] = useState(initialValues);
+  const [touched, setTouched] = useState({});
+  const [errors, setErrors] = useState({});
 
-  const onSubmit = (data) => {
-    console.log("폼 데이터 제출");
-    console.log(data);
+  const handleChangeInput = (name, value) => {
+    // value가 변할 때마다
+    setValues({
+      ...values,
+      [name]: value,
+    });
   };
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input type={"email"} {...register("email")} />
-      <input type={"password"} {...register("password")} />
-      <input type={"submit"} />
-    </form>
-  );
-};
+  const handleBlur = (name) => {
+    setTouched({
+      ...touched,
+      [name]: true,
+    });
+  };
 
-export default SignUpPage;
+  const getTextInputProps = (name) => {
+    const value = values[name];
+    const onChange = (event) => handleChangeInput(name, event.target.value);
+    const onBlur = () => handleBlur(name);
+
+    return { value, onChange, onBlur };
+  };
+
+  useEffect(() => {
+    const newErrors = validate(values);
+    console.log(newErrors);
+    setErrors(newErrors);
+  }, [validate, values]);
+
+  return { values, errors, touched, getTextInputProps };
+}
+
+export default useForm;

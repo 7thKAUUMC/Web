@@ -5,52 +5,78 @@ export const LoginContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  min-height: 100vh; /* 화면 전체 높이 채우기 */
-  color: white; /* 글자색 */
-  padding-top: 150px;
+  min-height: 100vh;
+  padding: 200px;
 `;
 
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  width: 300px; /* 너비 조정 */
-  padding: 20px;
-  border-radius: 8px; /* 둥근 모서리 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+export const LoginWrapper = styled.div`
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+`;
+
+export const LoginTitle = styled.h1`
+  color: white;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 24px;
+  font-weight: 600;
 `;
 
 export const Input = styled.input`
-  margin-bottom: 15px; /* 입력 필드 간격 */
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  outline: none;
+  width: 90%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solid
+    ${(props) => (props.error ? "#ff4d4f" : "rgba(255, 255, 255, 0.3)")};
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 16px;
+  transition: all 0.3s ease;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
 
   &:focus {
-    border-color: #007bff; /* 포커스 시 테두리 색상 */
+    outline: none;
+    border-color: ${(props) => (props.error ? "#ff4d4f" : "#6a7adf")};
+    box-shadow: 0 0 0 2px
+      ${(props) =>
+        props.error ? "rgba(255, 77, 79, 0.2)" : "rgba(106, 122, 223, 0.2)"};
   }
 `;
 
 export const ErrorMessage = styled.p`
-  color: red; /* 에러 메시지 색상 */
-  margin: 0 0 15px; /* 에러 메시지 간격 */
-  font-size: 15px;
+  color: #ff4d4f;
+  margin: -15px 0 15px;
+  font-size: 12px;
+  text-align: left;
 `;
 
 export const SubmitButton = styled.button`
-  padding: 10px;
-  background-color: ${(props) =>
-    props.isValid ? "red" : "gray"}; /* 유효성 여부에 따라 배경색 */
+  width: 100%;
+  padding: 12px;
+  background-color: ${(props) => (props.isValid ? "red" : "gray")};
   color: white;
   border: none;
-  border-radius: 4px;
-  cursor: ${(props) =>
-    props.isValid
-      ? "pointer"
-      : "not-allowed"}; /* 유효성 여부에 따라 커서 모양 */
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: ${(props) => (props.isValid ? "pointer" : "not-allowed")};
 
   &:hover {
-    background-color: ${(props) =>
-      props.isValid ? "darkred" : "gray"}; /* 유효성 여부에 따라 호버 색상 */
+    background-color: ${(props) => (props.isValid ? "#ff3333" : "#cccccc")};
+    ${(props) =>
+      props.isValid &&
+      `
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    `}
   }
 `;
