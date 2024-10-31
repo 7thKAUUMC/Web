@@ -1,38 +1,63 @@
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import React from "react";
+import useForm from "../../hooks/useForm";
+import { validateSignUp } from "../../utils/validate";
+import * as S from "./signup.style";
 
 const SignUp = () => {
-  const schema = yup.object().shape({
-    email: yup.string().email().required("이메일을 반드시 입력해주세요."),
-    password: yup
-      .string()
-      .min(8, "비밀번호는 8자 이상이어야 합니다.")
-      .max(16, "비밀번호는 16자 이하여야 합니다.")
-      .required(),
-  });
+  const { values, errors, touched, getTextInputProps } = useForm(
+    {
+      email: "",
+      password: "",
+      passwordCheck: "",
+    },
+    validateSignUp
+  );
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
-
-  const onSubmit = (data) => {
-    console.log("폼 데이터 제출");
-    console.log(data);
+  const handleSubmit = (event) => {
+    console.log("가입 성공:", values);
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input type={"email"} {...register("email")} />
-      <p style={{ color: "red" }}>{errors.email?.message}</p>
-      <input type={"password"} {...register("password")} />
-      <p style={{ color: "red" }}>{errors.password?.message}</p>
-      <input type={"submit"} />
-    </form>
+    <S.SignupContainer>
+      <S.SignupWrapper>
+        <S.SignupTitle>회원가입</S.SignupTitle>
+        <form onSubmit={handleSubmit}>
+          <S.Input
+            type="text"
+            placeholder="이메일"
+            {...getTextInputProps("email")}
+          />
+          {errors.email && touched.email && (
+            <S.ErrorMessage>{errors.email}</S.ErrorMessage>
+          )}
+
+          <S.Input
+            type="password"
+            placeholder="비밀번호"
+            {...getTextInputProps("password")}
+          />
+          {errors.password && touched.password && (
+            <S.ErrorMessage>{errors.password}</S.ErrorMessage>
+          )}
+
+          <S.Input
+            type="password"
+            placeholder="비밀번호 확인"
+            {...getTextInputProps("passwordCheck")}
+          />
+          {errors.passwordCheck && touched.passwordCheck && (
+            <S.ErrorMessage>{errors.passwordCheck}</S.ErrorMessage>
+          )}
+
+          <S.SubmitButton
+            type="submit"
+            isValid={!(errors.email || errors.password || errors.passwordCheck)}
+          >
+            가입하기
+          </S.SubmitButton>
+        </form>
+      </S.SignupWrapper>
+    </S.SignupContainer>
   );
 };
 
