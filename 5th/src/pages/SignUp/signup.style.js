@@ -6,7 +6,7 @@ export const SignupContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
   min-height: 100vh;
-  padding: 200px;
+  padding: 100px;
 `;
 
 export const SignupWrapper = styled.div`
@@ -28,36 +28,9 @@ export const SignupTitle = styled.h1`
   font-weight: 600;
 `;
 
-export const Input = styled.input`
-  width: 90%;
-  padding: 12px 15px;
-  margin-bottom: 20px;
+export const Form = styled.form`
+  width: 100%;
   border-radius: 8px;
-  border: 1px solid
-    ${(props) => (props.error ? "#ff4d4f" : "rgba(255, 255, 255, 0.3)")};
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white;
-  font-size: 16px;
-  transition: all 0.3s ease;
-
-  &::placeholder {
-    color: rgba(255, 255, 255, 0.6);
-  }
-
-  &:focus {
-    outline: none;
-    border-color: ${(props) => (props.error ? "#ff4d4f" : "#6a7adf")};
-    box-shadow: 0 0 0 2px
-      ${(props) =>
-        props.error ? "rgba(255, 77, 79, 0.2)" : "rgba(106, 122, 223, 0.2)"};
-  }
-`;
-
-export const ErrorMessage = styled.p`
-  color: #ff4d4f;
-  margin: -15px 0 15px;
-  font-size: 12px;
-  text-align: left;
 `;
 
 export const SubmitButton = styled.button`
@@ -73,10 +46,5 @@ export const SubmitButton = styled.button`
 
   &:hover {
     background-color: ${(props) => (props.isValid ? "#ff3333" : "#cccccc")};
-    ${(props) =>
-      props.isValid &&
-      `
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    `}
   }
 `;
