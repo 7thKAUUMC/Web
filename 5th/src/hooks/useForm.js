@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 
 function useForm(initialValues, validate) {
-  console.log("initialValues!!!!: ", initialValues);
-  console.log("validate!!!!: ", validate);
   const [values, setValues] = useState(initialValues);
   const [touched, setTouched] = useState({});
   const [errors, setErrors] = useState({});
