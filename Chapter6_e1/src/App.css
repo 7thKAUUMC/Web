@@ -1,0 +1,50 @@
+.todo-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.todo-input {
+  padding: 8px;
+  width: 250px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+
+.todo-button {
+  padding: 8px 12px;
+  background-color: #2f16ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.todo-button:hover {
+  background-color: #2f16ff;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+
+.todo-task {
+  display: flex;
+  gap: 5px;
+}
+
+.todo-edit {
+  display: flex;
+  gap: 5px;
+}
