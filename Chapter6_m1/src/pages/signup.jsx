@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const schema = yup.object().shape({
   email: yup.string().email('올바른 이메일 형식이 아닙니다!').required('이메일은 필수 입력 항목입니다.'),
@@ -24,8 +25,22 @@ const SignUpPage = () => {
     mode: 'onChange',
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const navigate = useNavigate();
+
+  const onSubmit = async (data) => {
+    try {
+      const response = await fetch("http://localhost:3000/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      
+      if (response.ok) {
+        navigate("/login"); 
+      }
+    } catch (error) {
+      console.error("회원가입 에러:", error);
+    }
   };
 
   const handleFocus = (field) => {

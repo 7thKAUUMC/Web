@@ -1,14 +1,58 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
+  const [nickname, setNickname] = useState(null); 
+  const navigate = useNavigate();
+
+  const fetchUserData = () => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      fetch("http://localhost:3000/user/me", {
+        method: "GET",
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+        .then(response => response.json())
+        .then(data => {
+          const nickname = data.email.split("@")[0];
+          setNickname(nickname);
+        })
+        .catch(() => {
+          setNickname(null);
+        });
+    } else {
+      setNickname(null);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, [localStorage.getItem("accessToken")]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken"); 
+    localStorage.removeItem("refreshToken");
+    setNickname(null); 
+    navigate("/"); 
+  };
+
   return (
     <nav>
       <NavContainer>
         <NavLogo to={'/'}>YOONCHA</NavLogo>
         <ButtonContainer>
-          <NavButton to='/login'>로그인</NavButton>
-          <NavButtonPink to='/signup'>회원가입</NavButtonPink>
+        {nickname ? (
+            <>
+              <WelcomeText>{nickname}님 반갑습니다.</WelcomeText>
+              <NavButton onClick={handleLogout}>로그아웃</NavButton>
+            </>
+          ) : (
+            <>
+              <NavButton to='/login'>로그인</NavButton>
+              <NavButtonPink to='/signup'>회원가입</NavButtonPink>
+            </>
+          )}
         </ButtonContainer>
       </NavContainer>
     </nav>
@@ -75,3 +119,10 @@ const NavButtonPink = styled(Link)`
     background-color: #ffffff !important;
   }
 `
+
+const WelcomeText = styled.span`
+  color: #ff007f;
+  font-size: 15px;
+  margin-right: 10px;
+  font-weight: 700;
+`;
