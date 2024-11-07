@@ -10,6 +10,7 @@ const useCustomFetch = (url) => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
+        await new Promise(resolve => setTimeout(resolve, 2000)); // 지연 추가햇음
         const response = await axiosInstance.get(url, {
           params: {
             language: "ko-KR",
@@ -21,11 +22,11 @@ const useCustomFetch = (url) => {
       } finally {
         setIsLoading(false);
       }
-    }
+    };
     fetchData();
   }, [url]);
 
-  return {data, isLoading, isError}
-}
+  return { data, isLoading, isError };
+};
 
 export default useCustomFetch;
