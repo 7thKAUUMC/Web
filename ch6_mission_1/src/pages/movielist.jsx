@@ -18,7 +18,7 @@ const MovieList = () => {
     params: { language: "ko", page: "1" },
     headers: {
       accept: "application/json",
-      Authorization: "Bearer your_api_key",
+      Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
     },
   });
 
