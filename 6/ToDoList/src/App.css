@@ -1,0 +1,107 @@
+/* src/App.css */
+
+/* 기본적인 전체 레이아웃 스타일 */
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f0f4f8;
+  color: #333;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+h1 {
+  text-align: center;
+}
+
+.app {
+  width: 100%;
+  max-width: 600px;
+}
+
+.todo-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.todo-list {
+  margin-top: 20px;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.todo-content, .todo-editing {
+  display: flex;
+  gap: 10px;
+}
+
+/* 버튼 스타일 */
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* 각각의 버튼에 className에 따라 스타일 적용 */
+.add-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.add-button:hover {
+  background-color: #0056b3;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+.edit-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #218838;
+}
+
+/* 인풋 스타일 */
+input[type="text"] {
+  width: 250px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+  border-color: #007bff;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 10px;  /* 버튼 사이 간격 추가 */
+}
