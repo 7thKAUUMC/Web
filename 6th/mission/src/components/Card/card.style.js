@@ -1,19 +1,17 @@
 import styled from "styled-components";
 
-// 카드 리스트 스타일 수정: 1행에 9개 카드가 보이도록 설정
+// 카드 리스트 스타일
 export const CardList = styled.div`
   display: grid;
-  grid-template-columns: repeat(9, 1fr); // 1행에 9개 카드
-  gap: 20px;
-  padding: 10px;
-  background-color: transparent; // 배경색을 투명으로 설정
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
 `;
 
-// 카드 컨테이너 스타일 수정: 배경색 제거
+// 카드 컨테이너 스타일
 export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%; // 카드의 너비를 100%로 설정하여 그리드에 맞게 조정
+  width: 140px;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
@@ -28,7 +26,6 @@ export const CardContainer = styled.div`
 // 포스터 스타일 수정
 export const Poster = styled.img`
   width: 100%; // 카드 너비에 맞게 조정
-  height: 150px; // 높이를 150px로 줄임
   object-fit: cover;
 `;
 

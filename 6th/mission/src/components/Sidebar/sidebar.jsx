@@ -1,21 +1,20 @@
 import React from "react";
 import { FaSearch, FaFilm } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { SidebarWrapper, SidebarButton } from "./sidebar.style";
+import { SidebarWrapper, SidebarLink } from "./sidebar.style";
 
 const Sidebar = () => {
   return (
     <SidebarWrapper>
       <ul>
         <li>
-          <SidebarButton as={Link} to="/search">
+          <SidebarLink to="/search">
             <FaSearch /> 찾기
-          </SidebarButton>
+          </SidebarLink>
         </li>
         <li>
-          <SidebarButton as={Link} to="/movies">
+          <SidebarLink to="/movies">
             <FaFilm /> 영화
-          </SidebarButton>
+          </SidebarLink>
         </li>
       </ul>
     </SidebarWrapper>
