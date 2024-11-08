@@ -1,15 +1,47 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import './signin.css';
+import { useNavigate } from 'react-router-dom';
 
 const SignInPage = () => {
     const { register, handleSubmit, formState: { errors, isValid }, trigger } = useForm({
         mode: 'onChange'
     });
 
-    const onSubmit = (data) => {
-        console.log('이메일:', data.email);
-        console.log('비밀번호:', data.password);
+    const navigate = useNavigate();
+
+    const onSubmit = async (data) => {
+        try {
+            const response = await fetch('http://localhost:3000/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: data.email,
+                    password: data.password
+                })
+            });
+
+            if (response.ok) {
+                const responseData = await response.json();
+                // 토큰을 로컬 스토리지에 저장
+                localStorage.setItem('accessToken', responseData.accessToken);
+                localStorage.setItem('refreshToken', responseData.refreshToken);
+                // 로그인 성공 시 홈 페이지로 이동
+                navigate('/');
+                localStorage.setItem('userEmail', data.email);
+
+            } else {
+                // 에러 응답 처리
+                const errorData = await response.json();
+                console.error('로그인 실패:', errorData);
+                alert(`로그인 실패: ${errorData.message || '알 수 없는 오류가 발생했습니다.'}`);
+            }
+        } catch (error) {
+            console.error('로그인 중 오류가 발생했습니다:', error);
+            alert('로그인 중 오류가 발생했습니다. 다시 시도해 주세요.');
+        }
     };
 
     return (

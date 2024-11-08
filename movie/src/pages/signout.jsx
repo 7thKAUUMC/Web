@@ -4,13 +4,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import Input from '../components/Input';
 import './signin.css';
+import { useNavigate } from 'react-router-dom';
 
 const schema = yup.object().shape({
     email: yup.string().email('올바른 형식이 아닙니다.').required('이메일은 필수 입력 항목입니다.'),
     password: yup.string().min(8, '비밀번호는 8자리 이상이어야 합니다.').max(16, '비밀번호는 16자리 이하여야 합니다.').required('비밀번호는 필수 입력 항목입니다.'),
-    passwordCheck: yup.string().oneOf([yup.ref('password'), null], '비밀번호가 일치하지 않습니다.').required('비밀번호 확인은 필수 입력 항목입니다.'),
-    gender: yup.string().oneOf(['male', 'female'], '성별을 선택해 주세요.').required('성별은 필수 입력 항목입니다.'),
-    birthdate: yup.date().required('생년월일은 필수 입력 항목입니다.').typeError('유효한 날짜를 입력해 주세요.')
+    passwordCheck: yup.string().oneOf([yup.ref('password'), null], '비밀번호가 일치하지 않습니다.').required('비밀번호 확인은 필수 입력 항목입니다.')
 });
 
 const SignOutPage = () => {
@@ -19,8 +18,34 @@ const SignOutPage = () => {
         mode: 'onChange'
     });
 
-    const onSubmit = (data) => {
-        console.log(data);
+    const navigate = useNavigate();
+    const onSubmit = async (data) => {
+        try {
+            const response = await fetch('http://localhost:3000/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: data.email,
+                    password: data.password,
+                    passwordCheck: data.passwordCheck
+                })
+            });
+
+            if (response.ok) {
+                // 회원가입 성공 시 처리 (예: signin 페이지로 이동)
+                navigate('/signin');
+            } else {
+                // 에러 응답 처리
+                const errorData = await response.json();
+                console.error('회원가입 실패:', errorData);
+                alert(`회원가입 실패: ${errorData.message || '알 수 없는 오류가 발생했습니다.'}`);
+            }
+        } catch (error) {
+            console.error('회원가입 중 오류가 발생했습니다:', error);
+            alert('회원가입 중 오류가 발생했습니다. 다시 시도해 주세요.');
+        }
     };
 
     return (
@@ -50,36 +75,6 @@ const SignOutPage = () => {
                     register={register('passwordCheck')}
                     error={errors.passwordCheck}
                     onBlur={() => trigger('passwordCheck')}
-                />
-                <div className="form-group gender-group">
-                    <label>성별:</label>
-                    <div className="gender-options">
-                        <label className="gender-option">
-                            <input
-                                type="radio"
-                                value="male"
-                                {...register('gender')}
-                            />
-                            남성
-                        </label>
-                        <label className="gender-option">
-                            <input
-                                type="radio"
-                                value="female"
-                                {...register('gender')}
-                            />
-                            여성
-                        </label>
-                    </div>
-                    {errors.gender && <div className="error-message">{errors.gender.message}</div>}
-                </div>
-                <Input
-                    label="생년월일"
-                    id="birthdate"
-                    type="date"
-                    register={register('birthdate')}
-                    error={errors.birthdate}
-                    onBlur={() => trigger('birthdate')}
                 />
                 <button type="submit" className="signin-button" disabled={!isValid}>
                     회원가입
