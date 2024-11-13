@@ -1,5 +1,9 @@
 import { createContext, useState } from "react";
-import { addTodo, deleteTodo, updateTodo } from "../service/TodoService";
+import {
+  addTodo,
+  deleteTodo,
+  updateTodo as updateTodoService,
+} from "../service/TodoService";
 
 // 데이터를 담고 있음
 export const TodoContext = createContext();
@@ -18,6 +22,16 @@ export function TodoContextProvider({ children }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     addTodo(todos, setTodos, text, setText);
+    console.log("handleSubmit");
+  };
+
+  const startEditing = (id, currentText) => {
+    setEditingId(id);
+    setEditText(currentText);
+  };
+
+  const updateTodo = (id, text) => {
+    updateTodoService(id, text, setTodos, setEditingId);
   };
 
   return (
@@ -33,7 +47,8 @@ export function TodoContextProvider({ children }) {
         setEditText,
         handleSubmit,
         deleteTodo: (id) => deleteTodo(id, setTodos),
-        updateTodo: (id, text) => updateTodo(id, text, setTodos, setEditingId),
+        updateTodo,
+        startEditing,
       }}
     >
       {children}

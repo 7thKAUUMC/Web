@@ -5,25 +5,6 @@ import styled from "styled-components";
 import Button from "./components/Button/button";
 import Input from "./components/Input/input";
 
-const AppContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 20px;
-`;
-
-const FormContainer = styled.form`
-  margin: 20px 0;
-  display: flex;
-  gap: 10px;
-`;
-
-const TodoList = styled.div`
-  margin-top: 20px;
-`;
-
 function App() {
   const {
     todos,
@@ -66,5 +47,24 @@ function App() {
     </AppContainer>
   );
 }
+
+const AppContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+`;
+
+const FormContainer = styled.form`
+  margin: 20px 0;
+  display: flex;
+  gap: 10px;
+`;
+
+const TodoList = styled.div`
+  margin-top: 20px;
+`;
 
 export default App;
