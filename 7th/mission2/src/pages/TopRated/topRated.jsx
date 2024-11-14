@@ -24,6 +24,10 @@ const TopRatedMoviesPage = () => {
     }
   }, [inView, isFetching, hasNextPage, fetchNextPage]);
 
+  if (isError) {
+    return <h1 style={{ color: "white" }}>에러가 발생했습니다.</h1>;
+  }
+
   return (
     <>
       <S.CardList>
