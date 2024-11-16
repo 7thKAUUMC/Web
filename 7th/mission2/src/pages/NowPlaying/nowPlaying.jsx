@@ -37,10 +37,6 @@ const NowPlayingMoviesPage = () => {
     }
   }, [inView, isFetching, hasNextPage, fetchNextPage]);
 
-  if (isError) {
-    return <h1 style={{ color: "white" }}>에러가 발생했습니다.</h1>;
-  }
-
   // if (isPending) {
   //   return (
   //     //<h1 style={{ color: "white" }}>로딩중...</h1>

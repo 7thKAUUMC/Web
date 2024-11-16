@@ -12,6 +12,7 @@ const PopularMoviesPage = () => {
     isFetching,
     hasNextPage,
     fetchNextPage,
+    isError,
   } = UseGetInfiniteMovies("popular");
 
   const { ref, inView } = useInView({

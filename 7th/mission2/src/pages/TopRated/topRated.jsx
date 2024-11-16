@@ -12,6 +12,7 @@ const TopRatedMoviesPage = () => {
     isFetching,
     hasNextPage,
     fetchNextPage,
+    isError,
   } = UseGetInfiniteMovies("top_rated");
 
   const { ref, inView } = useInView({

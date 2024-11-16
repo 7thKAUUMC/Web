@@ -12,6 +12,7 @@ const UpcomingMoviesPage = () => {
     isFetching,
     hasNextPage,
     fetchNextPage,
+    isError,
   } = UseGetInfiniteMovies("upcoming");
 
   const { ref, inView } = useInView({
