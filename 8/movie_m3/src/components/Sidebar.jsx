@@ -1,7 +1,7 @@
 // components/Sidebar.jsx
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { FaSearch, FaFilm } from 'react-icons/fa';
+import { FaSearch, FaFilm, FaRegHeart } from 'react-icons/fa';
 
 const SidebarContainer = styled.div`
   height: 100vh;
@@ -16,7 +16,7 @@ const MenuItem = styled.div`
   align-items: center;
   margin-bottom: 20px;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 14px;
 
   svg {
     margin-right: 10px;
@@ -38,6 +38,10 @@ const Sidebar = () => {
     navigate('/movies'); // '영화' 클릭 시 /movies 페이지로 이동
   };
 
+  const handleSubscriptionsClick = () => {
+    navigate('/subscriptions'); // '구독' 클릭 시 /subscriptions 페이지로 이동
+  };
+
   return (
     <SidebarContainer>
       <MenuItem onClick={handleSearchClick}>
@@ -45,6 +49,9 @@ const Sidebar = () => {
       </MenuItem>
       <MenuItem onClick={handleMoviesClick}>
         <FaFilm /> 영화
+      </MenuItem>
+      <MenuItem onClick={handleSubscriptionsClick}>
+        <FaRegHeart /> 구독
       </MenuItem>
     </SidebarContainer>
   );

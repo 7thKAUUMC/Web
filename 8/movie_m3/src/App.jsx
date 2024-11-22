@@ -15,6 +15,7 @@ import NowPlayingPage from './pages/NowPlayingPage.jsx';
 import TopRatedMoviesPage from './pages/TopRatedMoviesPage.jsx';
 import UpcomingMoviesPage from './pages/UpcomingMoviesPage.jsx';
 import MovieDetailPage from './pages/MovieDetailsPage.jsx';
+import Subscriptions from './pages/subscriptions.jsx';
 
 // QueryClient 인스턴스를 생성합니다.
 const queryClient = new QueryClient();
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
             {
                 path: 'movies/:movieId', 
                 element: <MovieDetailPage />,
+            },
+            {
+                path: 'subscriptions', 
+                element: <Subscriptions/>,
             },
         ]
     }
