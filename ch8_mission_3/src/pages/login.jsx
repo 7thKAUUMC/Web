@@ -102,7 +102,17 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-image: url('/src/assets/category4.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 0.5);
+  background-blend-mode: darken;
 `;
 
 const LoginTitle = styled.h1`
@@ -149,7 +159,7 @@ const LoginButton = styled.button`
   color: white;
   border: none;
   border-radius: 4px;
-  background-color: #808080;
+  background-color: #000000;
 `;
 
 const SignUpLink = styled.div`
@@ -167,3 +177,5 @@ const SignUpLink = styled.div`
     text-decoration: underline;
   }
 `;
+
+

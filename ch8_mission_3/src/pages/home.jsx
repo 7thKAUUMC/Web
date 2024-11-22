@@ -35,22 +35,12 @@ const Video = styled.iframe`
   border: none;
 `;
 
-const fetchPopularMovies = async () => {
-  try {
-    const response = await axios.get(
-      'https://api.themoviedb.org/3/movie/popular',
-      {
-        headers: {
-          'Authorization': `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
-          'Content-Type': 'application/json'
-        }
-      }
-    );
-    setPopularMovies(response.data.results);
-  } catch (error) {
-    console.error("Error fetching popular movies:", error);
-  }
-};
+const MovieThumbnail = styled.img`
+  width: 100%;
+  max-width: 336px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+`;
 
 const HomePage = () => {
   const [popularMovies, setPopularMovies] = useState([]);
@@ -99,21 +89,28 @@ const HomePage = () => {
 
   return (
     <Container>
-    <Title>홈 페이지 입니다</Title>
-    {trailer ? (
-      <VideoContainer>
-        <Video
-          url={trailer}
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
+      <Title>홈 페이지 입니다</Title>
+      {popularMovies.map((movie) => (
+        <MovieThumbnail
+          key={movie.id}
+          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          alt={movie.title}
         />
-      </VideoContainer>
-    ) : (
-      <p style={{ color: 'white' }}>트레일러를 찾을 수 없습니다.</p>
-    )}
-  </Container>
+      ))}
+      {trailer ? (
+        <VideoContainer>
+          <Video
+            url={trailer}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </VideoContainer>
+      ) : (
+        <p style={{ color: 'white' }}>트레일러를 찾을 수 없습니다.</p>
+      )}
+    </Container>
   );
 };
 

@@ -126,13 +126,17 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
+  justify-content: center;
   width: 100%;
-  max-width: 336px;
-  margin: 0 auto;
-  padding: 0 19px;
-  background-color: #000;
-  min-height: 100vh;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-image: url('/src/assets/category4.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 0.5);
+  background-blend-mode: darken;
 `;
 
 const SignUpTitle = styled.h1`
@@ -144,7 +148,7 @@ const SignUpTitle = styled.h1`
 `;
 
 const Form = styled.form`
-  width: 100%;
+  width: 300px; // 로그인 페이지와 동일한 너비
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -157,9 +161,9 @@ const InputWrapper = styled.div`
 const StyledInput = styled.input`
   box-sizing: border-box;
   width: 100%;
-  height: 50px;
+  height: 44px; // 로그인 페이지와 동일한 높이
   padding: 0 14px;
-  border-radius: 5px;
+  border-radius: 4px;
   border: 1px solid ${({ hasError }) => (hasError ? '#E34935' : '#ddd')};
   background-color: white;
   font-size: 16px;
@@ -183,12 +187,12 @@ const ErrorMessage = styled.span`
 
 const SubmitButton = styled.input`
   width: 100%;
-  height: 50px;
-  border-radius: 5px;
+  height: 44px; // 로그인 페이지와 동일한 높이
+  border-radius: 4px;
   border: none;
-  background-color: #808080;
+  background-color: #000000;
   color: white;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.2s;
