@@ -1,0 +1,39 @@
+import { Outlet, useLocation } from 'react-router-dom';
+import styled from 'styled-components';
+import NavBar from '../components/NavBar';
+import Sidebar from '../components/Sidebar';
+
+// 메인 컨테이너 스타일 (Sidebar와 Outlet을 가로로 배치)
+const MainContainer = styled.div`
+  display: flex;
+  margin-top: 60px; /* NavBar 높이만큼 아래로 밀림 */
+`;
+
+// Content는 Sidebar 옆에 위치할 Outlet을 감싸는 div
+const Content = styled.div`
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #111;
+  color: white;
+`;
+
+const RootLayout = () => {
+    const location = useLocation(); // 현재 경로를 가져옵니다.
+
+    return (
+        <div>
+            <NavBar />
+            <MainContainer>
+                {/* 현재 경로가 '/signin' 또는 '/signup'이면 Sidebar를 숨깁니다. */}
+                {location.pathname !== '/signin' && location.pathname !== '/signout' && <Sidebar />}
+                
+                <Content>
+                    <Outlet /> 
+                </Content>
+            </MainContainer>
+        </div>
+    );
+};
+
+export default RootLayout;
+
