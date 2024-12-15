@@ -1,0 +1,31 @@
+.input-container {
+  margin: 20px 0;
+  width: 100%;
+}
+
+.input-box {
+  width: 70%;
+  max-width: 500px;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.add-btn {
+  padding: 12px 20px;
+  margin-left: 10px;
+  margin-top: 10px;
+  font-size: 16px;
+  background-color: #2f16ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-btn:hover {
+  background-color: #1f10b3;
+}
