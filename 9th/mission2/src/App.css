@@ -1,0 +1,15 @@
+.main-container {
+  padding-top: 5rem;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.header-container {
+  position: relative;
+  z-index: 100;
+}
+
+.footer-container {
+  position: relative;
+  z-index: 90;
+}
