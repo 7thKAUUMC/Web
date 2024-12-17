@@ -1,50 +1,56 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { clearCart } from '../features/cart/cartSlice.jsx';
-import CartItem from './CartItem';
+import React, { useEffect } from "react"; // useEffect 추가
+import { useSelector, useDispatch } from "react-redux";
+import { clearCart, calculateTotals } from "../features/cart/cartSlice.js"; // calculateTotals 추가
+import CartItem from "./CartItem";
+import {
+  CartSection,
+  CartHeader,
+  CartItemsContainer,
+  CartFooter,
+  ClearButton,
+} from "./CartContainer.style.js";
 
 const CartContainer = () => {
   const { cartItems, total, amount } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(calculateTotals());
+  }, [cartItems, dispatch]); // cartItems가 변경될 때마다 total과 amount 재계산
+
   if (amount < 1) {
     return (
-      <section className='cart'>
-        <header>
+      <CartSection>
+        <CartHeader>
           <h2>당신이 선택한 음원</h2>
-          <h4 className='empty-cart'>장바구니가 비었습니다</h4>
-        </header>
-      </section>
+          <h4 className="empty-cart">장바구니가 비었습니다</h4>
+        </CartHeader>
+      </CartSection>
     );
   }
 
   return (
-    <section className='cart'>
-      <header>
+    <CartSection>
+      <CartHeader>
         <h2>당신이 선택한 음원</h2>
-      </header>
-      <div>
+      </CartHeader>
+      <CartItemsContainer>
         {cartItems.map((item) => {
           return <CartItem key={item.id} {...item} />;
         })}
-      </div>
-      <footer>
+      </CartItemsContainer>
+      <CartFooter>
         <hr />
-        <div className='cart-total'>
+        <div className="cart-total">
           <h4>
-            총 가격 <span>\ {total}원</span>
+            총 금액 <span>\ {total}원</span>
           </h4>
         </div>
-        <button
-          className='btn clear-btn'
-          onClick={() => {
-            dispatch(clearCart());
-          }}
-        >
+        <ClearButton onClick={() => dispatch(clearCart())}>
           장바구니 초기화
-        </button>
-      </footer>
-    </section>
+        </ClearButton>
+      </CartFooter>
+    </CartSection>
   );
 };
 

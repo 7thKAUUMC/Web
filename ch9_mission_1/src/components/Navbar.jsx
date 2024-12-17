@@ -1,20 +1,24 @@
-import { CartIcon } from "../constants/icons";
+import React from "react";
+import { useSelector } from "react-redux";
+import { CartIcon } from "../constants/icons.jsx";
+import { Nav, NavCenter, NavContainer, AmountContainer } from "./Navbar.style";
 
 const Navbar = () => {
-    const {amount} = useSelector((state) => state.cart);
-    return (
-        <nav>
-            <div claseeName="nav-center">
-                <h3>Real Data UMC Playlist</h3>
-                <div className="nav-container">
-                    <CartIcon />
-                    <div className="amount-container">
-                        <p className="total-amount">{amount}</p>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    );
+  const { amount } = useSelector((state) => state.cart);
+
+  return (
+    <Nav>
+      <NavCenter>
+        <h3>Real Data UMC Playlist</h3>
+        <NavContainer>
+          <CartIcon />
+          <AmountContainer>
+            <p>{amount}</p>
+          </AmountContainer>
+        </NavContainer>
+      </NavCenter>
+    </Nav>
+  );
 };
 
 export default Navbar;

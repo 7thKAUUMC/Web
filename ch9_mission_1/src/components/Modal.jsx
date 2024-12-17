@@ -1,14 +1,21 @@
 import ModalButton from "./ModalButton";
+import { ModalOverlay, ModalContainer } from "./Modal.style";
 
 const Modal = ({ children }) => {
-    return (
-        <aside className="modal-contaioner" onClick={(e) => {}}>
-            <div className="modal">
-                {children}
-                <ModalButton />
-            </div>
-        </aside>
-    );
+  return (
+    <ModalOverlay
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          // 모달 닫기 로직
+        }
+      }}
+    >
+      <ModalContainer>
+        {children}
+        <ModalButton />
+      </ModalContainer>
+    </ModalOverlay>
+  );
 };
 
 export default Modal;
