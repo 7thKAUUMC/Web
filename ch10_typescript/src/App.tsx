@@ -1,4 +1,3 @@
-import './App.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
@@ -9,7 +8,6 @@ import LoginPage from './pages/login';
 import SignupPage from './pages/signup';
 import SearchPage from './pages/search';
 import MoviesPage from './pages/movies';
-import MovieList from './pages/movielist';
 import MovieInfo from './pages/movieinfo';
 import NowPlaying from './pages/NowPlaying';
 import Popular from './pages/Popular';
